@@ -1,0 +1,124 @@
+<html>
+<header>
+	<title>L337.js</title>
+	<style type="text/css">
+		h1 {
+			text-align: center;
+		}
+		textarea {
+			font-size: 16px;
+			line-height: 2em;
+			width: 49%;
+			font-family: Consolas, monospace;
+		}
+	</style>
+</header>
+<body>
+	<h1>L337.js</h1>
+	<textarea id="input" cols="60" rows="10"></textarea>
+	<textarea id="output" cols="60" rows="10"></textarea>
+	<script>
+		var table = {
+		  "a": ["4", "/-|"],
+		  "b": ["8"],
+		  "c": ["(", "["],
+		  "d": ["|)"],
+		  "e": ["3"],
+		  "f": ["!=", "ph"],
+		  "g": ["6"],
+		  "h": ["|-|"],
+		  "i": ["|", "!"],
+		  "j": [")"],
+		  "k": ["|<", "|("],
+		  "l": ["|_", "1"],
+		  "m": ["|V|", "/\\/\\"],
+		  "n": ["|\\|", "/\\/"],
+		  "o": ["0", "()"],
+		  "p": ["|>"],
+		  "q": ["9", "0"],
+		  "r": ["|?", "|2"],
+		  "s": ["5", "$"],
+		  "t": ["7", "+"],
+		  "u": ["|_|"],
+		  "v": ["\\/"],
+		  "w": ["\\/\\/", "\\X/"],
+		  "x": ["*", "><"],
+		  "y": ["\'\/"],
+		  "z": ["2"],
+		  "at": ["8"],
+		  "and": ["&"],
+
+		  "г": ["r"],
+		  "ж": [">|<", "}|{", "]|["],
+		  "з": ["'/_"],
+		  "и": ["|/|", "|"],
+		  "й": ["|/|", "|"],
+		  "л": ["/\\", "J[", "J|", "J"],
+		  "п": ["||", "|^|", "/7"],
+		  "р": ["|>"],
+		  "с": ["5"],
+		  "у": ["'/", "(_)"],
+		  "ф": ["<!>", "qp"],
+		  "ц": ["|_|_", "||_"],
+		  "ч": ["'-|", "4"],
+		  "ш": ["|||", "w", "LLI"],
+		  "щ": ["LLL"],
+		  "ъ": ["'b"],
+		  "ы": ["b|"],
+		  "ь": ["b", "|o"],
+		  "э": ["€", "-)"],
+		  "ю": ["|-O", "10"],
+		  "я": ["9|", "<|"]
+		}
+
+		var input = document.getElementById("input"),
+		    output = document.getElementById("output");
+
+		function get(char) {
+		  for(var item in table){
+		    if(item === char.toLowerCase()){
+		      outArray = table[item];
+		      return outArray[Math.floor(Math.random() * outArray.length)]
+		    }
+		  }
+		}
+
+		function translate(char) {
+		  var ruStr = "абвдеёкмнох",
+		      enStr = "abvdeekmhox";
+		  var ruArr = ruStr.split(""),
+		      enArr = enStr.split("");
+		  for(var i=0; i<ruArr.length; i++){
+		    if(ruArr[i] === char){
+		      return enStr[i];
+		    }
+		  }
+		}
+
+		function convert(event) {
+		  var textArray = input.value.split(''),
+		      outStr = "";
+
+		  for(var c in textArray){
+		    if(textArray[c] === " "){
+		      outStr += " ";
+		    } else {
+		      leeted = get(textArray[c]);
+		      if(!leeted){
+		        trnsl = translate(textArray[c]);
+		        if(trnsl){
+		          outStr += get(trnsl);
+		        }
+		      } else {
+		        outStr += leeted;
+		      }
+		    }
+		  }
+
+		  output.innerHTML = outStr;
+		}
+
+		input.addEventListener("keyup", convert);
+	</script>
+</body>
+</html>
